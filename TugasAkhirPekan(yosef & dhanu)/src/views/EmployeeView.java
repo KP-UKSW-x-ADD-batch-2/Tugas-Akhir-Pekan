@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import models.EmployeeModel;
 import tools.DbConnection;
 import java.util.ServiceLoader;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -52,11 +53,11 @@ public class EmployeeView extends javax.swing.JFrame {
         emailField.setText("");
         phoneNumberField.setText("");
         hireDateField.setText("");
-        jobIdField.setText("");
+        jobIdBox.setSelectedItem(null);
         salaryField.setText("");
         commisionPctField.setText("");
-        managerIdField.setText("");
-        departementIdField.setText("");
+        managerIdBox.setSelectedItem(null);
+        departementIdBox.setSelectedItem(null);
 
         try {
             int i = 1;
@@ -153,15 +154,15 @@ public class EmployeeView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         hireDateField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jobIdField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         salaryField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         commisionPctField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        managerIdField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        departementIdField = new javax.swing.JTextField();
+        jobIdBox = new javax.swing.JComboBox<>();
+        departementIdBox = new javax.swing.JComboBox<>();
+        managerIdBox = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
         searchField = new javax.swing.JTextField();
@@ -221,7 +222,7 @@ public class EmployeeView extends javax.swing.JFrame {
                 employeeIdFieldKeyReleased(evt);
             }
         });
-        jPanel3.add(employeeIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 37, 250, 24));
+        jPanel3.add(employeeIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 250, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -234,7 +235,7 @@ public class EmployeeView extends javax.swing.JFrame {
                 firstNameFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 98, 250, 24));
+        jPanel3.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 250, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -247,7 +248,7 @@ public class EmployeeView extends javax.swing.JFrame {
                 lastNameFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 159, 250, 24));
+        jPanel3.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 153, 250, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -260,7 +261,7 @@ public class EmployeeView extends javax.swing.JFrame {
                 emailFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 24));
+        jPanel3.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 214, 250, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,7 +274,7 @@ public class EmployeeView extends javax.swing.JFrame {
                 phoneNumberFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(phoneNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 281, 250, 24));
+        jPanel3.add(phoneNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 275, 250, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -286,25 +287,12 @@ public class EmployeeView extends javax.swing.JFrame {
                 hireDateFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(hireDateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 342, 250, 24));
+        jPanel3.add(hireDateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 336, 250, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Job ID :");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 377, -1, -1));
-
-        jobIdField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jobIdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jobIdFieldActionPerformed(evt);
-            }
-        });
-        jobIdField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jobIdFieldKeyReleased(evt);
-            }
-        });
-        jPanel3.add(jobIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 403, 250, 24));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -317,7 +305,7 @@ public class EmployeeView extends javax.swing.JFrame {
                 salaryFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(salaryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 464, 250, 24));
+        jPanel3.add(salaryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 458, 250, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -330,45 +318,28 @@ public class EmployeeView extends javax.swing.JFrame {
                 commisionPctFieldActionPerformed(evt);
             }
         });
-        jPanel3.add(commisionPctField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 525, 250, 24));
+        jPanel3.add(commisionPctField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 519, 250, 30));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Manager ID :");
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
 
-        managerIdField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        managerIdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                managerIdFieldActionPerformed(evt);
-            }
-        });
-        managerIdField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                managerIdFieldKeyReleased(evt);
-            }
-        });
-        jPanel3.add(managerIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 586, 250, 24));
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Departement ID :");
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 621, -1, -1));
 
-        departementIdField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        departementIdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                departementIdFieldActionPerformed(evt);
-            }
-        });
-        departementIdField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                departementIdFieldKeyReleased(evt);
-            }
-        });
-        jPanel3.add(departementIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 647, 250, 24));
+        jobIdBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "J001", "J002", "J003", "J004", "J005" }));
+        jPanel3.add(jobIdBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 250, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 270, 690));
+        departementIdBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "D001", "D002", "D003", "D004", "D005", "D006" }));
+        jPanel3.add(departementIdBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 250, 30));
+
+        managerIdBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010", "E011", "E012" }));
+        jPanel3.add(managerIdBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 250, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 270, 700));
 
         employeeTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -492,21 +463,6 @@ public class EmployeeView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneNumberFieldActionPerformed
 
-    private void hireDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hireDateFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hireDateFieldActionPerformed
-
-    private void jobIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobIdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jobIdFieldActionPerformed
-
-    private void jobIdFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jobIdFieldKeyReleased
-        // TODO add your handling code here:
-        int position = jobIdField.getCaretPosition();
-        jobIdField.setText(jobIdField.getText().toUpperCase());
-        jobIdField.setCaretPosition(position);
-    }//GEN-LAST:event_jobIdFieldKeyReleased
-
     private void salaryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_salaryFieldActionPerformed
@@ -514,14 +470,6 @@ public class EmployeeView extends javax.swing.JFrame {
     private void commisionPctFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commisionPctFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_commisionPctFieldActionPerformed
-
-    private void managerIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerIdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_managerIdFieldActionPerformed
-
-    private void departementIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departementIdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_departementIdFieldActionPerformed
 
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
         // TODO add your handling code here:
@@ -536,7 +484,7 @@ public class EmployeeView extends javax.swing.JFrame {
         DbConnection connection = new DbConnection();
         IEmployeeDao iedao = new EmployeeDao(connection.GetConnection());
         IEmployeeController iec = new EmployeeController(connection.GetConnection());
-        EmployeeModel location = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), jobIdField.getText(), salaryField.getText(), commisionPctField.getText(), managerIdField.getText(), departementIdField.getText());
+        EmployeeModel location = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), (String) jobIdBox.getSelectedItem(), salaryField.getText(), commisionPctField.getText(), (String) managerIdBox.getSelectedItem(), (String) departementIdBox.getSelectedItem());
 
         JOptionPane.showMessageDialog(null, iec.insert(location));
         SwingUtilities.updateComponentTreeUI(insertButton);
@@ -547,11 +495,11 @@ public class EmployeeView extends javax.swing.JFrame {
         emailField.setText("");
         phoneNumberField.setText("");
         hireDateField.setText("");
-        jobIdField.setText("");
+        jobIdBox.setSelectedItem(null);
         salaryField.setText("");
         commisionPctField.setText("");
-        managerIdField.setText("");
-        departementIdField.setText("");
+        managerIdBox.setSelectedItem(null);
+        departementIdBox.setSelectedItem(null);
 
         tampil();
     }//GEN-LAST:event_insertButtonActionPerformed
@@ -560,7 +508,7 @@ public class EmployeeView extends javax.swing.JFrame {
         DbConnection connection = new DbConnection();
         IEmployeeController iec = new EmployeeController(connection.GetConnection());
         //        regionIdField.setEditable(false);
-        EmployeeModel location = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), jobIdField.getText(), salaryField.getText(), commisionPctField.getText(), managerIdField.getText(), departementIdField.getText());
+        EmployeeModel location = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), (String) jobIdBox.getSelectedItem(), salaryField.getText(), commisionPctField.getText(), (String) managerIdBox.getSelectedItem(), (String) departementIdBox.getSelectedItem());
 
         JOptionPane.showMessageDialog(null, iec.update(location));
 
@@ -570,11 +518,12 @@ public class EmployeeView extends javax.swing.JFrame {
         emailField.setText("");
         phoneNumberField.setText("");
         hireDateField.setText("");
-        jobIdField.setText("");
+        jobIdBox.setSelectedItem(null);
         salaryField.setText("");
         commisionPctField.setText("");
-        managerIdField.setText("");
-        departementIdField.setText("");
+        managerIdBox.setSelectedItem(null);
+        departementIdBox.setSelectedItem(null);
+
         tampil();
     }//GEN-LAST:event_updateButtonActionPerformed
 
@@ -585,7 +534,7 @@ public class EmployeeView extends javax.swing.JFrame {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Delete", "Title on Box", dialogButton);
         if (dialogResult == 0) {
-            EmployeeModel employee = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), jobIdField.getText(), salaryField.getText(), commisionPctField.getText(), managerIdField.getText(), departementIdField.getText());
+            EmployeeModel employee = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), (String) jobIdBox.getSelectedItem(), salaryField.getText(), commisionPctField.getText(), (String) managerIdBox.getSelectedItem(), (String) departementIdBox.getSelectedItem());
 
             JOptionPane.showMessageDialog(null, iec.delete(employee.getEmployeeId()));
 
@@ -595,11 +544,11 @@ public class EmployeeView extends javax.swing.JFrame {
             emailField.setText("");
             phoneNumberField.setText("");
             hireDateField.setText("");
-            jobIdField.setText("");
+            jobIdBox.setSelectedItem(null);
             salaryField.setText("");
             commisionPctField.setText("");
-            managerIdField.setText("");
-            departementIdField.setText("");
+            managerIdBox.setSelectedItem(null);
+            departementIdBox.setSelectedItem(null);
 
             tampil();
         } else {
@@ -611,26 +560,12 @@ public class EmployeeView extends javax.swing.JFrame {
         tampil();
     }//GEN-LAST:event_refreshButtonActionPerformed
 
-    private void managerIdFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_managerIdFieldKeyReleased
-        // TODO add your handling code here:
-        int position = managerIdField.getCaretPosition();
-        managerIdField.setText(managerIdField.getText().toUpperCase());
-        managerIdField.setCaretPosition(position);
-    }//GEN-LAST:event_managerIdFieldKeyReleased
-
-    private void departementIdFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departementIdFieldKeyReleased
-        // TODO add your handling code here:
-        int position = departementIdField.getCaretPosition();
-        departementIdField.setText(departementIdField.getText().toUpperCase());
-        departementIdField.setCaretPosition(position);
-    }//GEN-LAST:event_departementIdFieldKeyReleased
-
     private void employeeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeTableMouseClicked
         // TODO add your handling code here:
-
+        TableModel model = employeeTable.getModel();
         JTable source = (JTable) evt.getSource();
         int i = employeeTable.getSelectedRow();
-        
+
         employeeIdField.setEditable(false);
 
         employeeIdField.setText((String) source.getModel().getValueAt(i, 1));
@@ -639,11 +574,90 @@ public class EmployeeView extends javax.swing.JFrame {
         emailField.setText((String) source.getModel().getValueAt(i, 4));
         phoneNumberField.setText((String) source.getModel().getValueAt(i, 5));
         hireDateField.setText((String) source.getModel().getValueAt(i, 6));
-        jobIdField.setText((String) source.getModel().getValueAt(i, 7));
+
+        String sub1 = model.getValueAt(i, 7).toString();
+        switch (sub1) {
+            case "J001":
+                jobIdBox.setSelectedIndex(0);
+                break;
+            case "J002":
+                jobIdBox.setSelectedIndex(1);
+                break;
+            case "J003":
+                jobIdBox.setSelectedIndex(2);
+                break;
+            case "J004":
+                jobIdBox.setSelectedIndex(3);
+                break;
+            case "J005":
+                jobIdBox.setSelectedIndex(4);
+                break;
+        }
+
         salaryField.setText((String) source.getModel().getValueAt(i, 8));
         commisionPctField.setText((String) source.getModel().getValueAt(i, 9));
-        managerIdField.setText((String) source.getModel().getValueAt(i, 10));
-        departementIdField.setText((String) source.getModel().getValueAt(i, 11));
+
+        String sub2 = model.getValueAt(i, 10).toString();
+        switch (sub2) {
+            case "E001":
+                managerIdBox.setSelectedIndex(0);
+                break;
+            case "E002":
+                managerIdBox.setSelectedIndex(1);
+                break;
+            case "E003":
+                managerIdBox.setSelectedIndex(2);
+                break;
+            case "E004":
+                managerIdBox.setSelectedIndex(3);
+                break;
+            case "E005":
+                managerIdBox.setSelectedIndex(4);
+                break;
+            case "E006":
+                managerIdBox.setSelectedIndex(5);
+                break;
+            case "E007":
+                managerIdBox.setSelectedIndex(6);
+                break;
+            case "E008":
+                managerIdBox.setSelectedIndex(7);
+                break;
+            case "E009":
+                managerIdBox.setSelectedIndex(8);
+                break;
+            case "E010":
+                managerIdBox.setSelectedIndex(9);
+                break;
+            case "E011":
+                managerIdBox.setSelectedIndex(10);
+                break;
+            case "E012":
+                managerIdBox.setSelectedIndex(11);
+                break;
+        }
+
+        String sub3 = model.getValueAt(i, 11).toString();
+        switch (sub3) {
+            case "D001":
+                departementIdBox.setSelectedIndex(0);
+                break;
+            case "D002":
+                departementIdBox.setSelectedIndex(1);
+                break;
+            case "D003":
+                departementIdBox.setSelectedIndex(2);
+                break;
+            case "D004":
+                departementIdBox.setSelectedIndex(3);
+                break;
+            case "D005":
+                departementIdBox.setSelectedIndex(4);
+                break;
+            case "D006":
+                departementIdBox.setSelectedIndex(5);
+                break;
+        }
 
     }//GEN-LAST:event_employeeTableMouseClicked
 
@@ -653,6 +667,10 @@ public class EmployeeView extends javax.swing.JFrame {
 //        m.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void hireDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hireDateFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hireDateFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -692,7 +710,7 @@ public class EmployeeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField commisionPctField;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JTextField departementIdField;
+    private javax.swing.JComboBox<String> departementIdBox;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField employeeIdField;
     private javax.swing.JTable employeeTable;
@@ -716,9 +734,9 @@ public class EmployeeView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jobIdField;
+    private javax.swing.JComboBox<String> jobIdBox;
     private javax.swing.JTextField lastNameField;
-    private javax.swing.JTextField managerIdField;
+    private javax.swing.JComboBox<String> managerIdBox;
     private javax.swing.JTextField phoneNumberField;
     private javax.swing.JButton refreshButton;
     private javax.swing.JTextField salaryField;

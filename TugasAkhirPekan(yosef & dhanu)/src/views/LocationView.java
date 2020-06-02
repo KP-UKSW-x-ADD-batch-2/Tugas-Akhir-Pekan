@@ -332,9 +332,8 @@ public class LocationView extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(postalCodeField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(locationIdField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(streetAddressField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                    .addComponent(locationIdField)
+                    .addComponent(streetAddressField)
                     .addComponent(cityField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
@@ -555,7 +554,6 @@ public class LocationView extends javax.swing.JFrame {
             case "C005":
                 countryIdBox.setSelectedIndex(4);
                 break;
-
         }
     }//GEN-LAST:event_locationTableMouseClicked
 
