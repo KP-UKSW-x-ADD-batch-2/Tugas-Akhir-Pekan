@@ -58,6 +58,12 @@ public class EmployeeView extends javax.swing.JFrame {
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        String date = sdf.format(hireDateChooser.getDate());
 //        pst.setString(date);
+////////////////////
+//String isoDatePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+//
+//SimpleDateFormat simpleDateFormat = new SimpleDateFormat(isoDatePattern);
+//
+//String dateString = simpleDateFormat.format(new Date());
         
         jobIdBox.setSelectedItem(null);
         salaryField.setText("");
@@ -179,6 +185,7 @@ public class EmployeeView extends javax.swing.JFrame {
         refreshButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         hireDateChooser = new com.toedter.calendar.JDateChooser();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -429,6 +436,14 @@ public class EmployeeView extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 660, 50, 50));
         jPanel1.add(hireDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 640, 260, 40));
+
+        jFormattedTextField1.setText("jFormattedTextField1");
+        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 650, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -684,6 +699,10 @@ public class EmployeeView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_hireDateFieldActionPerformed
 
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -731,6 +750,7 @@ public class EmployeeView extends javax.swing.JFrame {
     private javax.swing.JTextField hireDateField;
     private javax.swing.JButton insertButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
