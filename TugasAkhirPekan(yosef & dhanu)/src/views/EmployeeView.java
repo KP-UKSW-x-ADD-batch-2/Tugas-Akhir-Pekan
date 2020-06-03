@@ -13,6 +13,7 @@ import daos.idaos.IEmployeeDao;
 import static java.awt.SystemColor.text;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import javax.swing.DefaultButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -53,6 +54,11 @@ public class EmployeeView extends javax.swing.JFrame {
         emailField.setText("");
         phoneNumberField.setText("");
         hireDateField.setText("");
+        
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String date = sdf.format(hireDateChooser.getDate());
+//        pst.setString(date);
+        
         jobIdBox.setSelectedItem(null);
         salaryField.setText("");
         commisionPctField.setText("");
@@ -172,6 +178,7 @@ public class EmployeeView extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        hireDateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -421,6 +428,7 @@ public class EmployeeView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 660, 50, 50));
+        jPanel1.add(hireDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 640, 260, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -495,6 +503,7 @@ public class EmployeeView extends javax.swing.JFrame {
         emailField.setText("");
         phoneNumberField.setText("");
         hireDateField.setText("");
+        hireDateChooser.setDateFormatString("");
         jobIdBox.setSelectedItem(null);
         salaryField.setText("");
         commisionPctField.setText("");
@@ -573,7 +582,10 @@ public class EmployeeView extends javax.swing.JFrame {
         lastNameField.setText((String) source.getModel().getValueAt(i, 3));
         emailField.setText((String) source.getModel().getValueAt(i, 4));
         phoneNumberField.setText((String) source.getModel().getValueAt(i, 5));
+        
         hireDateField.setText((String) source.getModel().getValueAt(i, 6));
+        
+        hireDateChooser.setDateFormatString((String) source.getModel().getValueAt(i, 6));
 
         String sub1 = model.getValueAt(i, 7).toString();
         switch (sub1) {
@@ -715,6 +727,7 @@ public class EmployeeView extends javax.swing.JFrame {
     private javax.swing.JTextField employeeIdField;
     private javax.swing.JTable employeeTable;
     private javax.swing.JTextField firstNameField;
+    private com.toedter.calendar.JDateChooser hireDateChooser;
     private javax.swing.JTextField hireDateField;
     private javax.swing.JButton insertButton;
     private javax.swing.JButton jButton1;
