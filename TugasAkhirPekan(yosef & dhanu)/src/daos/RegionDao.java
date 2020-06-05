@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import models.RegionModel;
+import models.Region;
 import tests.RegionTest;
 
 /**
@@ -27,8 +27,8 @@ public class RegionDao implements IRegionDao {
     }
 
     @Override
-    public List<RegionModel> getAll() {
-        List<RegionModel> listRegion = new ArrayList<>();
+    public List<Region> getAll() {
+        List<Region> listRegion = new ArrayList<>();
         String query = "SELECT * FROM regions";
 
         try {
@@ -36,7 +36,7 @@ public class RegionDao implements IRegionDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                RegionModel r = new RegionModel(resultSet.getString(1), resultSet.getString(2));
+                Region r = new Region(resultSet.getString(1), resultSet.getString(2));
                 listRegion.add(r);
             }
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class RegionDao implements IRegionDao {
     }
 
     @Override
-    public boolean insert(RegionModel r) {
+    public boolean insert(Region r) {
         boolean result = false;
         
         String query = "INSERT INTO regions (region_id, region_name) VALUES (?,?);";
@@ -64,7 +64,7 @@ public class RegionDao implements IRegionDao {
     }
 
     @Override
-    public boolean update(RegionModel r) {
+    public boolean update(Region r) {
         boolean result = false;
         
         String query = "UPDATE regions SET region_name = ? WHERE regions.region_id = ?;";
@@ -101,9 +101,9 @@ public class RegionDao implements IRegionDao {
     }
 
     @Override
-    public List<RegionModel> search(String regionId) {
+    public List<Region> search(String regionId) {
 
-        List<RegionModel> listRegion = new ArrayList<RegionModel>();
+        List<Region> listRegion = new ArrayList<Region>();
         String query = "select * from regions where region_id like '%" + regionId + "%'";
         
         try {
@@ -111,7 +111,7 @@ public class RegionDao implements IRegionDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             
             while (resultSet.next()) {
-                RegionModel r = new RegionModel(resultSet.getString(1), resultSet.getString(2));
+                Region r = new Region(resultSet.getString(1), resultSet.getString(2));
                 listRegion.add(r);
             }
         } catch (Exception e) {

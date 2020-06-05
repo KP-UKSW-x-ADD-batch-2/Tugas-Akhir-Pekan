@@ -10,7 +10,7 @@ import daos.RegionDao;
 import daos.idaos.IRegionDao;
 import java.sql.Connection;
 import java.util.List;
-import models.RegionModel;
+import models.Region;
 
 /**
  *
@@ -25,7 +25,7 @@ public class RegionController implements IRegionController {
     }
 
     @Override
-    public List<RegionModel> getAll() {
+    public List<Region> getAll() {
         if (irdao.getAll().isEmpty()) {
             System.out.println("Data yang dicari kosong");
             return null;
@@ -36,9 +36,9 @@ public class RegionController implements IRegionController {
     }
 
     @Override
-    public String insert(RegionModel r) {
+    public String insert(Region r) {
         String result;
-        RegionModel region = new RegionModel(r.getRegionId(), r.getRegionName());
+        Region region = new Region(r.getRegionId(), r.getRegionName());
         if (irdao.insert(region)) {
             result = "Data berhasil disimpan";
         } else {
@@ -48,9 +48,9 @@ public class RegionController implements IRegionController {
     }
 
     @Override
-    public String update(RegionModel r) {
+    public String update(Region r) {
         String result;
-        RegionModel region = new RegionModel();
+        Region region = new Region();
         region.getRegionId();
         region.getRegionName();
         if (irdao.update(r)) {
@@ -64,7 +64,7 @@ public class RegionController implements IRegionController {
     @Override
     public String delete(String regionId) {
         String result;
-        RegionModel region = new RegionModel();
+        Region region = new Region();
         region.getRegionId();
         if (irdao.delete(regionId)) {
             result = "Data berhasil dihapus";
@@ -75,7 +75,7 @@ public class RegionController implements IRegionController {
     }
 
     @Override
-    public List<RegionModel> search(String regionId) {
+    public List<Region> search(String regionId) {
         String result;
         if (irdao.search(regionId).isEmpty()) {
             System.out.println("Data yang dicari kosong");

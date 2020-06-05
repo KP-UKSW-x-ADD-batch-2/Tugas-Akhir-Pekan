@@ -9,7 +9,7 @@ import daos.RegionDao;
 import daos.idaos.IRegionDao;
 import java.sql.Connection;
 import java.util.Scanner;
-import models.RegionModel;
+import models.Region;
 import tools.DbConnection;
 
 /**
@@ -19,13 +19,13 @@ import tools.DbConnection;
 public class RegionTest {
 
     DbConnection connection = new DbConnection();
-    IRegionDao irdao = new RegionDao(connection.GetConnection());
+    IRegionDao irdao = new RegionDao(connection.getConnection());
     Scanner scann = new Scanner(System.in);
-    RegionModel r = new RegionModel();
+    Region r = new Region();
 
     public static void main(String[] args) {
         DbConnection connection = new DbConnection();
-        IRegionDao irdao = new RegionDao(connection.GetConnection());
+        IRegionDao irdao = new RegionDao(connection.getConnection());
         RegionTest r = new RegionTest();
         Scanner scann = new Scanner(System.in);
         int lanjut = 0;
@@ -66,7 +66,7 @@ public class RegionTest {
     }
 
     void show() {
-        for (RegionModel h : irdao.getAll()) {
+    for (Region h : irdao.getAll()) {
             System.out.println(h.getRegionId() + " | " + h.getRegionName());
         }
     }

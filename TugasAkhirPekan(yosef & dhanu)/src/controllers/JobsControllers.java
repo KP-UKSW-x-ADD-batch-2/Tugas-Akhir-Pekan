@@ -7,25 +7,25 @@ package controllers;
 
 import com.mysql.jdbc.Connection;
 import controllers.icontrollers.IJobsControllers;
-import daos.JobsDAO;
-import daos.idaos.IJobsDAO;
+import daos.JobDao;
 import java.util.List;
 import javax.swing.JOptionPane;
-import models.Jobs;
+import models.Job;
+import daos.idaos.IJobDao;
 
 /**
  *
  * @author User
  */
 public class JobsControllers implements IJobsControllers {
-    private IJobsDAO ijbsdao;
+    private IJobDao ijbsdao;
     
     public JobsControllers (Connection connection) {
-        ijbsdao = new JobsDAO(connection);
+        ijbsdao = new JobDao(connection);
     }
 
     @Override
-    public List<Jobs> getAll() {
+    public List<Job> getAll() {
         if (ijbsdao.getAll().isEmpty()) {
             JOptionPane.showMessageDialog(null,"Data Kosong");
             return null;
@@ -36,8 +36,8 @@ public class JobsControllers implements IJobsControllers {
     }
 
     @Override
-    public String insert(Jobs j) {
-        Jobs jobs = new Jobs(j.getJobID(), j.getJobTitle(), j.getMinSalary(), j.getMaxSalary());
+    public String insert(Job j) {
+        Job jobs = new Job(j.getJobID(), j.getJobTitle(), j.getMinSalary(), j.getMaxSalary());
         if (ijbsdao.insert(j)) {
             JOptionPane.showMessageDialog(null, "Data berhasil ditambah");
         } else  {
@@ -47,8 +47,8 @@ public class JobsControllers implements IJobsControllers {
     }
 
     @Override
-    public String update(Jobs j) {
-        Jobs jobs = new Jobs(j.getJobID(), j.getJobTitle(), j.getMinSalary(), j.getMaxSalary());
+    public String update(Job j) {
+        Job jobs = new Job(j.getJobID(), j.getJobTitle(), j.getMinSalary(), j.getMaxSalary());
         if (ijbsdao.update(j)) {
             JOptionPane.showMessageDialog(null, "Data Berhasil Diubah");
         } else {
@@ -59,7 +59,7 @@ public class JobsControllers implements IJobsControllers {
 
     @Override
     public String delete(String jobId) {
-         Jobs jobs = new Jobs();
+         Job jobs = new Job();
          if (ijbsdao.delete(jobId)) {
              JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
         } else {
@@ -69,8 +69,8 @@ public class JobsControllers implements IJobsControllers {
     }
 
     @Override
-    public List<Jobs> search(String jobId) {
-        Jobs jobs = new Jobs();
+    public List<Job> search(String jobId) {
+        Job jobs = new Job();
          if (ijbsdao.search(jobId).isEmpty()) {
              JOptionPane.showMessageDialog(null, "Data ditemukan");
         } else {

@@ -6,7 +6,7 @@
 package controllers.icontrollers;
 
 import java.util.List;
-import models.EmployeeModel;
+import models.Employee;
 
 /**
  *
@@ -14,13 +14,13 @@ import models.EmployeeModel;
  */
 public interface IEmployeeController {
 
-    public List<EmployeeModel> getAll();
+    public List<Employee> getAll();
 
-    public String insert(EmployeeModel e);
+    public String insert(Employee e);
 
-    public String update(EmployeeModel e);
+    public String update(Employee e);
 
     public String delete(String employeeId);
 
-    public List<EmployeeModel> search(String employeeId);
+    public List<Employee> search(String employeeId);
 }

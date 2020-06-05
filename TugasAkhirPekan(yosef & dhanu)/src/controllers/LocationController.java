@@ -10,7 +10,7 @@ import daos.LocationDao;
 import daos.idaos.ILocationDao;
 import java.sql.Connection;
 import java.util.List;
-import models.LocationModel;
+import models.Location;
 /**
  *
  * @author Yosef Febrianes
@@ -24,7 +24,7 @@ public class LocationController implements ILocationController {
     }
 
     @Override
-    public List<LocationModel> getAll() {
+    public List<Location> getAll() {
             if (ildao.getAll().isEmpty()) {
             System.out.println("Data yang dicari kosong");
             return null;
@@ -35,9 +35,9 @@ public class LocationController implements ILocationController {
     }
 
     @Override
-    public String insert(LocationModel r) {
+    public String insert(Location r) {
         String result;
-        LocationModel Location = new LocationModel(r.getLocationId(), r.getStreetAddress(), r.getPostalCode(), r.getCity(),r.getStateProvince(), r.getCountryId());
+        Location Location = new Location(r.getLocationId(), r.getStreetAddress(), r.getPostalCode(), r.getCity(),r.getStateProvince(), r.getCountryId());
         if (ildao.insert(Location)) {
             result = "Data berhasil disimpan";
         } else {
@@ -47,9 +47,9 @@ public class LocationController implements ILocationController {
     }
 
     @Override
-    public String update(LocationModel r) {
+    public String update(Location r) {
             String result;
-        LocationModel location = new LocationModel();
+        Location location = new Location();
         location.getLocationId();
         location.getStreetAddress();
         location.getPostalCode();
@@ -68,7 +68,7 @@ public class LocationController implements ILocationController {
     @Override
     public String delete(String locationId) {
               String result;
-        LocationModel location = new LocationModel();
+        Location location = new Location();
         location.getLocationId();
         if (ildao.delete(locationId)) {
             result = "Data berhasil dihapus";
@@ -78,7 +78,7 @@ public class LocationController implements ILocationController {
         return result;}
 
     @Override
-    public List<LocationModel> search(String locationId) {
+    public List<Location> search(String locationId) {
             String result;
         if (ildao.search(locationId).isEmpty()) {
             System.out.println("Data yang dicari kosong");

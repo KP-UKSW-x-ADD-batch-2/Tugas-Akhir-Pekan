@@ -6,19 +6,19 @@
 package controllers.icontrollers;
 
 import java.util.List;
-import models.LocationModel;
+import models.Location;
 /**
  *
  * @author Yosef Febrianes
  */
 public interface ILocationController {
-        public List<LocationModel> getAll();
+        public List<Location> getAll();
 
-    public String insert(LocationModel r);
+    public String insert(Location r);
 
-    public String update(LocationModel r);
+    public String update(Location r);
 
     public String delete(String locationId);
 
-    public List<LocationModel> search(String locationId);
+    public List<Location> search(String locationId);
 }

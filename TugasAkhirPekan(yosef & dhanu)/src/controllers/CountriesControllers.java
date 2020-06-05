@@ -7,24 +7,24 @@ package controllers;
 
 import com.mysql.jdbc.Connection;
 import controllers.icontrollers.ICountriesControllers;
-import daos.CountriesDAO;
-import daos.idaos.ICountriesDAO;
+import daos.CountryDao;
 import java.util.List;
 import javax.swing.JOptionPane;
-import models.Countries;
+import models.Country;
+import daos.idaos.ICountryDao;
 
 /**
  *
  * @author User
  */
 public class CountriesControllers implements ICountriesControllers {
-    private ICountriesDAO icoundao;
+    private ICountryDao icoundao;
     public CountriesControllers(Connection connnection) {
-        icoundao = new CountriesDAO(connnection) ;
+        icoundao = new CountryDao(connnection) ;
     }
 
     @Override
-    public List<Countries> getAll() {
+    public List<Country> getAll() {
         if (icoundao.getAll().isEmpty()) {
             System.out.println("Data Kosong");
             return null;
@@ -35,9 +35,9 @@ public class CountriesControllers implements ICountriesControllers {
     }
 
     @Override
-    public String insert(Countries c) {
+    public String insert(Country c) {
         String result;
-        Countries countries = new Countries(c.getCountryID(), c.getCountryname(), c.getRegionID());
+        Country countries = new Country(c.getCountryID(), c.getCountryname(), c.getRegionID());
         if (icoundao.insert(countries)) {
             result = "Data berhasil Disimpan";
         } else  {
@@ -46,8 +46,8 @@ public class CountriesControllers implements ICountriesControllers {
         return result;    }
 
     @Override
-    public String update(Countries c) {
-       Countries countries = new Countries(c.getCountryID(), c.getCountryname(), c.getRegionID());
+    public String update(Country c) {
+       Country countries = new Country(c.getCountryID(), c.getCountryname(), c.getRegionID());
        String result;
         if (icoundao.update(c)) {
             result = "Data Berhasil Diubah";
@@ -60,7 +60,7 @@ public class CountriesControllers implements ICountriesControllers {
     @Override
     public String delete(String countryId) {
         String result;
-         Countries countries = new Countries();
+         Country countries = new Country();
          countries.getCountryID();
          if (icoundao.delete(countryId)) {
              result = "Data berhasil dihapus";
@@ -70,7 +70,7 @@ public class CountriesControllers implements ICountriesControllers {
          return result;    }
 
     @Override
-    public List<Countries> search(String countryId) {
+    public List<Country> search(String countryId) {
         String result;
         if (icoundao.search(countryId).isEmpty()) {
             System.out.println("Data yang dicari kosong");

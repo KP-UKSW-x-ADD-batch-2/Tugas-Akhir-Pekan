@@ -9,7 +9,7 @@ import daos.LocationDao;
 import daos.idaos.ILocationDao;
 import java.sql.Connection;
 import java.util.Scanner;
-import models.LocationModel;
+import models.Location;
 import tools.DbConnection;
 
 /**
@@ -19,14 +19,14 @@ import tools.DbConnection;
 public class LocationTest {
 
     DbConnection connection = new DbConnection();
-    ILocationDao ildao = new LocationDao(connection.GetConnection());
+    ILocationDao ildao = new LocationDao(connection.getConnection());
     Scanner scann = new Scanner(System.in);
-    LocationModel l = new LocationModel();
+    Location l = new Location();
 
     public static void main(String[] args) {
 
         DbConnection connection = new DbConnection();
-        ILocationDao ildao = new LocationDao(connection.GetConnection());
+        ILocationDao ildao = new LocationDao(connection.getConnection());
         LocationTest l = new LocationTest();
         Scanner scann = new Scanner(System.in);
         int lanjut = 0;
@@ -67,7 +67,7 @@ public class LocationTest {
     }
 
     void show() {
-        for (LocationModel h : ildao.getAll()) {
+        for (Location h : ildao.getAll()) {
             System.out.println(h.getLocationId() + " | " + h.getStreetAddress() + " | " + h.getPostalCode() + " | " + h.getCity() + " | " + h.getStateProvince() + " | " + h.getCountryId());
         }
     }

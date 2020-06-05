@@ -6,16 +6,16 @@
 package controllers.icontrollers;
 
 import java.util.List;
-import models.Countries;
+import models.Country;
 
 /**
  *
  * @author User
  */
 public interface ICountriesControllers {
-    public List<Countries> getAll();
-    public String insert(Countries c);
-    public String update(Countries c);
+    public List<Country> getAll();
+    public String insert(Country c);
+    public String update(Country c);
     public String delete(String countryId);
-    public List<Countries> search(String countryId);
+    public List<Country> search(String countryId);
 }

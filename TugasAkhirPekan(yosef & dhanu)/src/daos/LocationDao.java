@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import models.LocationModel;
+import models.Location;
 import tests.LocationTest;
 
 /**
@@ -27,8 +27,8 @@ public class LocationDao implements ILocationDao {
     }
 
     @Override
-    public List<LocationModel> getAll() {
-        List<LocationModel> listLocation = new ArrayList<>();
+    public List<Location> getAll() {
+        List<Location> listLocation = new ArrayList<>();
         String query = "SELECT * FROM locations";
 
         try {
@@ -36,7 +36,7 @@ public class LocationDao implements ILocationDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                LocationModel r = new LocationModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
+                Location r = new Location(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
                 listLocation.add(r);
             }
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class LocationDao implements ILocationDao {
     }
 
     @Override
-    public boolean insert(LocationModel r) {
+    public boolean insert(Location r) {
         boolean result = false;
 
         String query
@@ -69,7 +69,7 @@ public class LocationDao implements ILocationDao {
     }
 
     @Override
-    public boolean update(LocationModel r) {
+    public boolean update(Location r) {
         boolean result = false;
 
         String query
@@ -111,8 +111,8 @@ public class LocationDao implements ILocationDao {
     }
 
     @Override
-    public List<LocationModel> search(String locationId) {
-        List<LocationModel> listLocation = new ArrayList<LocationModel>();
+    public List<Location> search(String locationId) {
+        List<Location> listLocation = new ArrayList<Location>();
         String query = "select * from locations where location_id like '%" + locationId + "%'";
 
         try {
@@ -120,7 +120,7 @@ public class LocationDao implements ILocationDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                LocationModel r = new LocationModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
+                Location r = new Location(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
                 listLocation.add(r);
             }
         } catch (Exception e) {

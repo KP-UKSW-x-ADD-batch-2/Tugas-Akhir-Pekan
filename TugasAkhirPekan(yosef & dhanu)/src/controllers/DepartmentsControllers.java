@@ -7,24 +7,24 @@ package controllers;
 
 import com.mysql.jdbc.Connection;
 import controllers.icontrollers.IDepartmentsControllers;
-import daos.DepartmentsDAO;
-import daos.idaos.IDepartmentsDAO;
+import daos.DepartmentDao;
 import java.util.List;
 import javax.swing.JOptionPane;
-import models.Departments;
+import models.Department;
+import daos.idaos.IDepartmentDao;
 
 /**
  *
  * @author User
  */
 public class DepartmentsControllers implements IDepartmentsControllers{
-    private IDepartmentsDAO idepdao;
+    private IDepartmentDao idepdao;
     public DepartmentsControllers (Connection connection) {
-        idepdao =  new DepartmentsDAO(connection);
+        idepdao =  new DepartmentDao(connection);
     }
     
     @Override
-    public List<Departments> getAll() {
+    public List<Department> getAll() {
         if (idepdao.getAll().isEmpty()) {
             System.out.println("Data yang dicari kosong");
             return null;
@@ -35,9 +35,9 @@ public class DepartmentsControllers implements IDepartmentsControllers{
     }
 
     @Override
-    public String insert(Departments d) {
+    public String insert(Department d) {
         String result;
-        Departments departments = new Departments(d.getDepartmentID(), d.getDepartmentName(), d.getManagerID(), d.getLocationID());
+        Department departments = new Department(d.getDepartmentID(), d.getDepartmentName(), d.getManagerID(), d.getLocationID());
         if (idepdao.insert(d)) {
             result = "Data berhasil ditambah";
         } else  {
@@ -47,8 +47,8 @@ public class DepartmentsControllers implements IDepartmentsControllers{
     }
 
     @Override
-    public String update(Departments d) {
-       Departments departments = new Departments(d.getDepartmentID(), d.getDepartmentName(), 
+    public String update(Department d) {
+       Department departments = new Department(d.getDepartmentID(), d.getDepartmentName(), 
                d.getManagerID(), d.getLocationID());
        String result;
         if (idepdao.update(d)) {
@@ -62,7 +62,7 @@ public class DepartmentsControllers implements IDepartmentsControllers{
     @Override
     public String delete(String departmentID) {
         String result;
-         Departments departments = new Departments();
+         Department departments = new Department();
          if (idepdao.delete(departmentID)) {
              result = "Data berhasil dihapus";
         } else {
@@ -72,8 +72,8 @@ public class DepartmentsControllers implements IDepartmentsControllers{
     }
 
     @Override
-    public List<Departments> search(String departmentsID) {
-       Departments departments = new Departments();
+    public List<Department> search(String departmentsID) {
+       Department departments = new Department();
          if (idepdao.search(departmentsID).isEmpty()) {
              System.out.println("Data berhasil dihapus");
         } else {

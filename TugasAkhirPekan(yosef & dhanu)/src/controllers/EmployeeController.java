@@ -10,7 +10,7 @@ import daos.EmployeeDao;
 import daos.idaos.IEmployeeDao;
 import java.sql.Connection;
 import java.util.List;
-import models.EmployeeModel;
+import models.Employee;
 
 /**
  *
@@ -25,7 +25,7 @@ public class EmployeeController implements IEmployeeController {
     }
 
     @Override
-    public List<EmployeeModel> getAll() {
+    public List<Employee> getAll() {
         if (iedao.getAll().isEmpty()) {
             System.out.println("Data yang dicari kosong");
             return null;
@@ -36,9 +36,9 @@ public class EmployeeController implements IEmployeeController {
     }
 
     @Override
-    public String insert(EmployeeModel e) {
+    public String insert(Employee e) {
         String result;
-        EmployeeModel employee = new EmployeeModel(e.getEmployeeId(), e.getFirstName(), e.getLastName(), e.getEmail(), e.getPhoneNumber(), e.getHireDate(), e.getJobId(), e.getSalary(), e.getCommisionPct(), e.getManagerId(), e.getDepartementId());
+        Employee employee = new Employee(e.getEmployeeId(), e.getFirstName(), e.getLastName(), e.getEmail(), e.getPhoneNumber(), e.getHireDate(), e.getJobId(), e.getSalary(), e.getCommisionPct(), e.getManagerId(), e.getDepartementId());
         if (iedao.insert(employee)) {
             result = "Data berhasil disimpan";
         } else {
@@ -48,9 +48,9 @@ public class EmployeeController implements IEmployeeController {
     }
 
     @Override
-    public String update(EmployeeModel e) {
+    public String update(Employee e) {
         String result;
-        EmployeeModel employee = new EmployeeModel();
+        Employee employee = new Employee();
         employee.getEmployeeId();
         employee.getFirstName();
         employee.getLastName();
@@ -74,7 +74,7 @@ public class EmployeeController implements IEmployeeController {
     @Override
     public String delete(String employeeId) {
         String result;
-        EmployeeModel employee = new EmployeeModel();
+        Employee employee = new Employee();
         employee.getEmployeeId();
         if (iedao.delete(employeeId)) {
             result = "Data berhasil dihapus";
@@ -85,7 +85,7 @@ public class EmployeeController implements IEmployeeController {
     }
 
     @Override
-    public List<EmployeeModel> search(String employeeId) {
+    public List<Employee> search(String employeeId) {
         String result;
         if (iedao.search(employeeId).isEmpty()) {
             System.out.println("Data yang dicari kosong");

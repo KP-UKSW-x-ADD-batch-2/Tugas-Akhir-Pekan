@@ -6,7 +6,7 @@
 package controllers.icontrollers;
 
 import java.util.List;
-import models.RegionModel;
+import models.Region;
 
 /**
  *
@@ -14,13 +14,13 @@ import models.RegionModel;
  */
 public interface IRegionController {
 
-    public List<RegionModel> getAll();
+    public List<Region> getAll();
 
-    public String insert(RegionModel r);
+    public String insert(Region r);
 
-    public String update(RegionModel r);
+    public String update(Region r);
 
     public String delete(String regionId);
 
-    public List<RegionModel> search(String regionId);
+    public List<Region> search(String regionId);
 }

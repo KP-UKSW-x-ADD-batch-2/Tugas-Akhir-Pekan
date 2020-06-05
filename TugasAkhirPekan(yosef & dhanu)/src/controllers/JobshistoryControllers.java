@@ -7,21 +7,21 @@ package controllers;
 
 import com.mysql.jdbc.Connection;
 import controllers.icontrollers.IJobshistoryControllers;
-import daos.JobshistoryDAO;
-import daos.idaos.IJobshistoryDAO;
+import daos.JobshistoryDao;
 import java.util.List;
 import javax.swing.JOptionPane;
 import models.Jobshistory;
+import daos.idaos.IJobshistoryDao;
 
 /**
  *
  * @author User
  */
 public class JobshistoryControllers implements IJobshistoryControllers{
-    private IJobshistoryDAO ijhdao;
+    private IJobshistoryDao ijhdao;
     
     public JobshistoryControllers (Connection connection) {
-        ijhdao = new JobshistoryDAO(connection);
+        ijhdao = new JobshistoryDao(connection);
     }
     
     @Override

@@ -5,7 +5,9 @@
  */
 package tools;
 
-import java.sql.Connection;
+//import java.sql.Connection;
+
+import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 
 /**
@@ -15,7 +17,7 @@ import java.sql.DriverManager;
 public class DbConnection {
     private Connection con;
     
-    public Connection GetConnection(){
+    public Connection getConnection(){
     
         try {
             Class.forName("com.mysql.jdbc.Driver");

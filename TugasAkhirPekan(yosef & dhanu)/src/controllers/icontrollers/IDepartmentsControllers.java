@@ -6,16 +6,16 @@
 package controllers.icontrollers;
 
 import java.util.List;
-import models.Departments;
+import models.Department;
 
 /**
  *
  * @author User
  */
 public interface IDepartmentsControllers {
-    public List<Departments> getAll();
-    public String insert(Departments d);
-    public String update(Departments d);
+    public List<Department> getAll();
+    public String insert(Department d);
+    public String update(Department d);
     public String delete(String departmentsId);
-    public List<Departments> search(String departmentsId);
+    public List<Department> search(String departmentsId);
 }

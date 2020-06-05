@@ -11,8 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import models.EmployeeModel;
-import models.LocationModel;
+import models.Employee;
+import models.Location;
 import tests.EmployeeTest;
 
 /**
@@ -28,8 +28,8 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public List<EmployeeModel> getAll() {
-        List<EmployeeModel> listEmployee = new ArrayList<>();
+    public List<Employee> getAll() {
+        List<Employee> listEmployee = new ArrayList<>();
         String query = "SELECT * FROM employees";
 
         try {
@@ -37,7 +37,7 @@ public class EmployeeDao implements IEmployeeDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                EmployeeModel e = new EmployeeModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
+                Employee e = new Employee(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
                         resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8),
                         resultSet.getString(9), resultSet.getString(10), resultSet.getString(11));
                 listEmployee.add(e);
@@ -49,7 +49,7 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public boolean insert(EmployeeModel e) {
+    public boolean insert(Employee e) {
         boolean result = false;
 
         String query = "INSERT INTO employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commision_pct, manager_id, departement_id) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
@@ -76,7 +76,7 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public boolean update(EmployeeModel e) {
+    public boolean update(Employee e) {
 
         boolean result = false;
 
@@ -123,8 +123,8 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public List<EmployeeModel> search(String employeeId) {
-        List<EmployeeModel> listEmployee = new ArrayList<EmployeeModel>();
+    public List<Employee> search(String employeeId) {
+        List<Employee> listEmployee = new ArrayList<Employee>();
         String query = "select * from employees where employee_id like '%" + employeeId + "%'";
 
         try {
@@ -132,7 +132,7 @@ public class EmployeeDao implements IEmployeeDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                EmployeeModel e = new EmployeeModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
+                Employee e = new Employee(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
                         resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8),
                         resultSet.getString(9), resultSet.getString(10), resultSet.getString(11));
                 listEmployee.add(e);

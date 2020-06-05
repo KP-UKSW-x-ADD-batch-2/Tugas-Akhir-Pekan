@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import models.EmployeeModel;
+import models.Employee;
 import tools.DbConnection;
 import java.util.ServiceLoader;
 import javax.swing.table.TableModel;
@@ -40,7 +40,7 @@ public class EmployeeView extends javax.swing.JFrame {
 
     void tampil() {
         DbConnection connection = new DbConnection();
-        IEmployeeDao iedao = new EmployeeDao(connection.GetConnection());
+        IEmployeeDao iedao = new EmployeeDao(connection.getConnection());
         DefaultTableModel dt;
         DefaultButtonModel db;
         Object[] baris = {"No", "Employee ID", "First Name", "Last Name", "Email", "Phone Number", "Hire Date", "Job ID", "Salary", "Commision Pct", "Manager ID", "Departement ID"};
@@ -73,21 +73,21 @@ public class EmployeeView extends javax.swing.JFrame {
 
         try {
             int i = 1;
-            for (EmployeeModel empliong : iedao.getAll()) {
+            for (Employee empliong : iedao.getAll()) {
 //                System.out.println(regiong.getRegionId() + " || " + regiong.getRegionName());
 
-                String NO = (String) Integer.toString(i);
-                String ID = (String) empliong.getEmployeeId().toString();
-                String FN = (String) empliong.getFirstName().toString();
-                String LN = (String) empliong.getLastName().toString();
-                String E = (String) empliong.getEmail().toString();
-                String PN = (String) empliong.getPhoneNumber().toString();
-                String HD = (String) empliong.getHireDate().toString();
-                String JI = (String) empliong.getJobId().toString();
-                String S = (String) empliong.getSalary().toString();
-                String CP = (String) empliong.getCommisionPct().toString();
-                String MI = (String) empliong.getManagerId().toString();
-                String DI = (String) empliong.getDepartementId().toString();
+                String NO = Integer.toString(i);
+                String ID = empliong.getEmployeeId();
+                String FN = empliong.getFirstName();
+                String LN = empliong.getLastName();
+                String E = empliong.getEmail();
+                String PN = empliong.getPhoneNumber();
+                String HD = empliong.getHireDate();
+                String JI = empliong.getJobId();
+                String S = empliong.getSalary();
+                String CP = empliong.getCommisionPct();
+                String MI = empliong.getManagerId();
+                String DI = empliong.getDepartementId();
 
                 String[] data = {NO, ID, FN, LN, E, PN, HD, JI, S, CP, MI, DI};
                 dt.addRow(data);
@@ -101,9 +101,9 @@ public class EmployeeView extends javax.swing.JFrame {
 
     private void searching() {
         DbConnection connection = new DbConnection();
-        IEmployeeDao iedao = new EmployeeDao(connection.GetConnection());
-        IEmployeeController iec = new EmployeeController(connection.GetConnection());
-        EmployeeModel employee = new EmployeeModel(searchButton.getText());
+        IEmployeeDao iedao = new EmployeeDao(connection.getConnection());
+        IEmployeeController iec = new EmployeeController(connection.getConnection());
+        Employee employee = new Employee(searchButton.getText());
 
 //        Region r = new Region();
         DefaultTableModel dt;
@@ -114,22 +114,22 @@ public class EmployeeView extends javax.swing.JFrame {
         employeeTable.setModel(dt);
 
         try {
-            for (EmployeeModel empliong : iedao.search(searchField.getText())) {
+            for (Employee empliong : iedao.search(searchField.getText())) {
 //                System.out.println(regiong.getRegionId() + " || " + regiong.getRegionName());
 
-                String ID = (String) empliong.getEmployeeId().toString();
-                String FN = (String) empliong.getFirstName().toString();
-                String LN = (String) empliong.getLastName().toString();
-                String E = (String) empliong.getEmail().toString();
-                String PN = (String) empliong.getPhoneNumber().toString();
-                String HD = (String) empliong.getHireDate().toString();
-                String JI = (String) empliong.getJobId().toString();
-                String S = (String) empliong.getSalary().toString();
-                String CP = (String) empliong.getCommisionPct().toString();
-                String MI = (String) empliong.getManagerId().toString();
-                String DI = (String) empliong.getDepartementId().toString();
+                String ID = empliong.getEmployeeId();
+                String FN = empliong.getFirstName();
+                String LN = empliong.getLastName();
+                String E = empliong.getEmail();
+                String PN = empliong.getPhoneNumber();
+                String HD = empliong.getHireDate();
+                String JI = empliong.getJobId();
+                String S = empliong.getSalary();
+                String CP = empliong.getCommisionPct();
+                String MI = empliong.getManagerId();
+                String DI = empliong.getDepartementId();
 
-                String bt = (String) refreshButton.toString();
+                String bt = refreshButton+"";
 
                 String[] data = {ID, FN, LN, E, PN, HD, JI, S, CP, MI, DI};
                 dt.addRow(data);
@@ -505,9 +505,14 @@ public class EmployeeView extends javax.swing.JFrame {
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
         DbConnection connection = new DbConnection();
-        IEmployeeDao iedao = new EmployeeDao(connection.GetConnection());
-        IEmployeeController iec = new EmployeeController(connection.GetConnection());
-        EmployeeModel location = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), (String) jobIdBox.getSelectedItem(), salaryField.getText(), commisionPctField.getText(), (String) managerIdBox.getSelectedItem(), (String) departementIdBox.getSelectedItem());
+        IEmployeeDao iedao = new EmployeeDao(connection.getConnection());
+        IEmployeeController iec = new EmployeeController(connection.getConnection());
+        Employee location = new Employee(employeeIdField.getText(), firstNameField.getText(),
+                lastNameField.getText(), emailField.getText(), phoneNumberField.getText(),
+                hireDateField.getText(),
+                jobIdBox.getSelectedItem()+"",
+                salaryField.getText(),
+                commisionPctField.getText(), managerIdBox.getSelectedItem()+"", departementIdBox.getSelectedItem()+"");
 
         JOptionPane.showMessageDialog(null, iec.insert(location));
         SwingUtilities.updateComponentTreeUI(insertButton);
@@ -530,9 +535,9 @@ public class EmployeeView extends javax.swing.JFrame {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         DbConnection connection = new DbConnection();
-        IEmployeeController iec = new EmployeeController(connection.GetConnection());
+        IEmployeeController iec = new EmployeeController(connection.getConnection());
         //        regionIdField.setEditable(false);
-        EmployeeModel location = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), (String) jobIdBox.getSelectedItem(), salaryField.getText(), commisionPctField.getText(), (String) managerIdBox.getSelectedItem(), (String) departementIdBox.getSelectedItem());
+        Employee location = new Employee(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), jobIdBox.getSelectedItem()+"", salaryField.getText(), commisionPctField.getText(), managerIdBox.getSelectedItem()+"", departementIdBox.getSelectedItem()+"");
 
         JOptionPane.showMessageDialog(null, iec.update(location));
 
@@ -553,14 +558,14 @@ public class EmployeeView extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         DbConnection connection = new DbConnection();
-        IEmployeeController iec = new EmployeeController(connection.GetConnection());
-        //setText((String) source.getModel().getValueAt(row, column));
+        IEmployeeController iec = new EmployeeController(connection.getConnection());
+        //setText(source.getModel().getValueAt(row, column));
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Delete", "Title on Box", dialogButton);
         if (dialogResult == 0) {
-            EmployeeModel employee = new EmployeeModel(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), (String) jobIdBox.getSelectedItem(), salaryField.getText(), commisionPctField.getText(), (String) managerIdBox.getSelectedItem(), (String) departementIdBox.getSelectedItem());
+            Employee location = new Employee(employeeIdField.getText(), firstNameField.getText(), lastNameField.getText(), emailField.getText(), phoneNumberField.getText(), hireDateField.getText(), jobIdBox.getSelectedItem()+"", salaryField.getText(), commisionPctField.getText(), managerIdBox.getSelectedItem()+"", departementIdBox.getSelectedItem()+"");
 
-            JOptionPane.showMessageDialog(null, iec.delete(employee.getEmployeeId()));
+            JOptionPane.showMessageDialog(null, iec.delete(location.getEmployeeId()));
 
             employeeIdField.setText("");
             firstNameField.setText("");
@@ -592,17 +597,15 @@ public class EmployeeView extends javax.swing.JFrame {
 
         employeeIdField.setEditable(false);
 
-        employeeIdField.setText((String) source.getModel().getValueAt(i, 1));
-        firstNameField.setText((String) source.getModel().getValueAt(i, 2));
-        lastNameField.setText((String) source.getModel().getValueAt(i, 3));
-        emailField.setText((String) source.getModel().getValueAt(i, 4));
-        phoneNumberField.setText((String) source.getModel().getValueAt(i, 5));
-        
-        hireDateField.setText((String) source.getModel().getValueAt(i, 6));
-        
-        hireDateChooser.setDateFormatString((String) source.getModel().getValueAt(i, 6));
+        employeeIdField.setText(source.getModel().getValueAt(i, 1)+"");
+        firstNameField.setText(source.getModel().getValueAt(i, 2)+"");
+        lastNameField.setText(source.getModel().getValueAt(i, 3)+"");
+        emailField.setText(source.getModel().getValueAt(i, 4)+"");
+        phoneNumberField.setText(source.getModel().getValueAt(i, 5)+"");
+        hireDateField.setText(source.getModel().getValueAt(i, 6)+"");       
+        hireDateChooser.setDateFormatString(source.getModel().getValueAt(i, 6)+"");
 
-        String sub1 = model.getValueAt(i, 7).toString();
+        String sub1 = model.getValueAt(i, 7)+"";
         switch (sub1) {
             case "J001":
                 jobIdBox.setSelectedIndex(0);
@@ -621,10 +624,10 @@ public class EmployeeView extends javax.swing.JFrame {
                 break;
         }
 
-        salaryField.setText((String) source.getModel().getValueAt(i, 8));
-        commisionPctField.setText((String) source.getModel().getValueAt(i, 9));
+        salaryField.setText(source.getModel().getValueAt(i, 8)+"");
+        commisionPctField.setText(source.getModel().getValueAt(i, 9)+"");
 
-        String sub2 = model.getValueAt(i, 10).toString();
+        String sub2 = model.getValueAt(i, 10)+"";
         switch (sub2) {
             case "E001":
                 managerIdBox.setSelectedIndex(0);
@@ -664,7 +667,7 @@ public class EmployeeView extends javax.swing.JFrame {
                 break;
         }
 
-        String sub3 = model.getValueAt(i, 11).toString();
+        String sub3 = model.getValueAt(i, 11)+"";
         switch (sub3) {
             case "D001":
                 departementIdBox.setSelectedIndex(0);
@@ -690,7 +693,7 @@ public class EmployeeView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Menu m = new Menu();
+        MenuView m = new MenuView();
 //        m.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

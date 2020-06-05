@@ -6,16 +6,16 @@
 package controllers.icontrollers;
 
 import java.util.List;
-import models.Jobs;
+import models.Job;
 
 /**
  *
  * @author User
  */
 public interface IJobsControllers {
-    public List<Jobs> getAll();
-    public String insert(Jobs j);
-    public String update(Jobs j);
+    public List<Job> getAll();
+    public String insert(Job j);
+    public String update(Job j);
     public String delete(String jobId);
-    public List<Jobs> search(String jobId);
+    public List<Job> search(String jobId);
 }
