@@ -6,7 +6,7 @@
 package daos.idaos;
 
 import java.util.List;
-import models.RegionModel;
+import models.Region;
 
 /**
  *
@@ -14,15 +14,15 @@ import models.RegionModel;
  */
 public interface IRegionDao {
 
-    public List<RegionModel> getAll();
+    public List<Region> getAll();
 
-    public boolean insert(RegionModel r);
+    public boolean insert(Region r);
 
-    public boolean update(RegionModel r);
+    public boolean update(Region r);
 
     public boolean delete(String regionId);
 
-    public List<RegionModel> search(String regionId);
+    public List<Region> search(String regionId);
 
 //    public boolean Delete(String regionId);
 }

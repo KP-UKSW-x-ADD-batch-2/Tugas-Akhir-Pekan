@@ -9,7 +9,7 @@ import daos.EmployeeDao;
 import daos.idaos.IEmployeeDao;
 import java.sql.Connection;
 import java.util.Scanner;
-import models.EmployeeModel;
+import models.Employee;
 import tools.DbConnection;
 
 /**
@@ -19,14 +19,14 @@ import tools.DbConnection;
 public class EmployeeTest {
 
     DbConnection connection = new DbConnection();
-    IEmployeeDao iedao = new EmployeeDao(connection.GetConnection());
+    IEmployeeDao iedao = new EmployeeDao(connection.getConnection());
     Scanner scann = new Scanner(System.in);
-    EmployeeModel r = new EmployeeModel();
+    Employee r = new Employee();
 
     public static void main(String[] args) {
 
         DbConnection connection = new DbConnection();
-        IEmployeeDao iedao = new EmployeeDao(connection.GetConnection());
+        IEmployeeDao iedao = new EmployeeDao(connection.getConnection());
         EmployeeTest e = new EmployeeTest();
         Scanner scann = new Scanner(System.in);
         int lanjut = 0;
@@ -67,7 +67,7 @@ public class EmployeeTest {
     }
 
     void showw() {
-        for (EmployeeModel h : iedao.getAll()) {
+        for (Employee h : iedao.getAll()) {
             System.out.println(h.getEmployeeId() + " | " + h.getFirstName() + " | " + h.getLastName() + " | " + h.getEmail() + " | " + h.getPhoneNumber() + " | " + h.getHireDate() + " | " + h.getJobId() + " | " + h.getSalary() + " | " + h.getCommisionPct() + " | " + h.getManagerId() + " | " + h.getDepartementId());
         }
     }

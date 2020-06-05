@@ -6,7 +6,7 @@
 package daos.idaos;
 
 import java.util.List;
-import models.EmployeeModel;
+import models.Employee;
 
 /**
  *
@@ -14,14 +14,14 @@ import models.EmployeeModel;
  */
 public interface IEmployeeDao {
 
-    public List<EmployeeModel> getAll();
+    public List<Employee> getAll();
 
-    public boolean insert(EmployeeModel e);
+    public boolean insert(Employee e);
 
-    public boolean update(EmployeeModel e);
+    public boolean update(Employee e);
 
     public boolean delete(String employeeId);
 
-    public List<EmployeeModel> search(String employeeId);
+    public List<Employee> search(String employeeId);
 
 }

@@ -9,7 +9,7 @@ package models;
  *
  * @author Yosef Febrianes
  */
-public class EmployeeModel {
+public class Employee {
 
     private String employeeId;
     private String firstName;
@@ -23,13 +23,13 @@ public class EmployeeModel {
     private String managerId;
     private String departementId;
 
-    public EmployeeModel() {
+    public Employee() {
     }
 
-    public EmployeeModel(String text) {
+    public Employee(String text) {
     }
 
-    public EmployeeModel(String employeeId, String firstName, String lastName, String email, String phoneNumber, String hireDate, String jobId, String salary, String commisionPct, String managerId, String departementId) {
+    public Employee(String employeeId, String firstName, String lastName, String email, String phoneNumber, String hireDate, String jobId, String salary, String commisionPct, String managerId, String departementId) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;

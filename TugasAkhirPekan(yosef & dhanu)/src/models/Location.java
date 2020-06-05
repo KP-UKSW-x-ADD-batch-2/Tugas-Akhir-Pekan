@@ -9,7 +9,7 @@ package models;
  *
  * @author Yosef Febrianes
  */
-public class LocationModel {
+public class Location {
 
     private String locationId;
     private String streetAddress;
@@ -18,13 +18,13 @@ public class LocationModel {
     private String stateProvince;
     private String countryId;
 
-    public LocationModel() {
+    public Location() {
     }
 
-    public LocationModel(String text) {
+    public Location(String text) {
     }
 
-    public LocationModel(String locationId, String streetAddress, String postalCode, String city, String stateProvince, String countryId) {
+    public Location(String locationId, String streetAddress, String postalCode, String city, String stateProvince, String countryId) {
         this.locationId = locationId;
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;

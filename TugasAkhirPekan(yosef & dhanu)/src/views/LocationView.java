@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import models.LocationModel;
+import models.Location;
 import tools.DbConnection;
 import java.util.ServiceLoader;
 import javax.swing.table.TableModel;
@@ -39,7 +39,7 @@ public class LocationView extends javax.swing.JFrame {
 
     void tampil() {
         DbConnection connection = new DbConnection();
-        ILocationDao ildao = new LocationDao(connection.GetConnection());
+        ILocationDao ildao = new LocationDao(connection.getConnection());
 
 //        Region r = new Region();
         DefaultTableModel dt;
@@ -58,17 +58,17 @@ public class LocationView extends javax.swing.JFrame {
 
         try {
             int i = 1;
-            for (LocationModel regiong : ildao.getAll()) {
+            for (Location regiong : ildao.getAll()) {
 //                System.out.println(regiong.getRegionId() + " || " + regiong.getRegionName());
 
-                String NO = (String) Integer.toString(i);
-                String ID = (String) regiong.getLocationId().toString();
-                String SA = (String) regiong.getStreetAddress().toString();
-                String PC = (String) regiong.getPostalCode().toString();
-                String C = (String) regiong.getCity().toString();
-                String SP = (String) regiong.getStateProvince().toString();
-                String CI = (String) regiong.getCountryId().toString();
-                String bt = (String) refreshButton.toString();
+                String NO = Integer.toString(i);
+                String ID = regiong.getLocationId();
+                String SA = regiong.getStreetAddress();
+                String PC = regiong.getPostalCode();
+                String C = regiong.getCity();
+                String SP = regiong.getStateProvince();
+                String CI = regiong.getCountryId();
+                String bt = refreshButton+"";
 
                 String[] data = {NO, ID, SA, PC, C, SP, CI, bt};
                 dt.addRow(data);
@@ -82,9 +82,9 @@ public class LocationView extends javax.swing.JFrame {
 
     private void searching() {
         DbConnection connection = new DbConnection();
-        ILocationDao ildao = new LocationDao(connection.GetConnection());
-        ILocationController ilc = new LocationController(connection.GetConnection());
-        LocationModel location = new LocationModel(searchButton.getText());
+        ILocationDao ildao = new LocationDao(connection.getConnection());
+        ILocationController ilc = new LocationController(connection.getConnection());
+        Location location = new Location(searchButton.getText());
 
 //        Region r = new Region();
         DefaultTableModel dt;
@@ -95,16 +95,16 @@ public class LocationView extends javax.swing.JFrame {
         locationTable.setModel(dt);
 
         try {
-            for (LocationModel locationg : ildao.search(searchField.getText())) {
+            for (Location locationg : ildao.search(searchField.getText())) {
 //                System.out.println(regiong.getRegionId() + " || " + regiong.getRegionName());
 
-                String ID = (String) locationg.getLocationId().toString();
-                String SA = (String) locationg.getStreetAddress().toString();
-                String PC = (String) locationg.getPostalCode().toString();
-                String C = (String) locationg.getCity().toString();
-                String SP = (String) locationg.getStateProvince().toString();
-                String CI = (String) locationg.getCountryId().toString();
-                String bt = (String) refreshButton.toString();
+                String ID = locationg.getLocationId();
+                String SA = locationg.getStreetAddress();
+                String PC = locationg.getPostalCode();
+                String C = locationg.getCity();
+                String SP = locationg.getStateProvince();
+                String CI = locationg.getCountryId();
+                String bt = refreshButton+"";
 
                 String[] data = {ID, SA, PC, C, SP, CI, bt};
                 dt.addRow(data);
@@ -447,9 +447,9 @@ public class LocationView extends javax.swing.JFrame {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         DbConnection connection = new DbConnection();
-        ILocationController ilc = new LocationController(connection.GetConnection());
+        ILocationController ilc = new LocationController(connection.getConnection());
         //        regionIdField.setEditable(false);
-        LocationModel location = new LocationModel(locationIdField.getText(), streetAddressField.getText(), postalCodeField.getText(), cityField.getText(), stateProvinceField.getText(), (String) countryIdBox.getSelectedItem());
+        Location location = new Location(locationIdField.getText(), streetAddressField.getText(), postalCodeField.getText(), cityField.getText(), stateProvinceField.getText(), countryIdBox.getSelectedItem()+"");
 
         JOptionPane.showMessageDialog(null, ilc.update(location));
 
@@ -466,8 +466,8 @@ public class LocationView extends javax.swing.JFrame {
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
 
         DbConnection connection = new DbConnection();
-        ILocationController ilc = new LocationController(connection.GetConnection());
-        LocationModel location = new LocationModel(locationIdField.getText(), streetAddressField.getText(), postalCodeField.getText(), cityField.getText(), stateProvinceField.getText(), (String) countryIdBox.getSelectedItem());
+        ILocationController ilc = new LocationController(connection.getConnection());
+        Location location = new Location(locationIdField.getText(), streetAddressField.getText(), postalCodeField.getText(), cityField.getText(), stateProvinceField.getText(), countryIdBox.getSelectedItem()+"");
 
         JOptionPane.showMessageDialog(null, ilc.insert(location));
         SwingUtilities.updateComponentTreeUI(insertButton);
@@ -484,12 +484,12 @@ public class LocationView extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         DbConnection connection = new DbConnection();
-        ILocationController ilc = new LocationController(connection.GetConnection());
-        //setText((String) source.getModel().getValueAt(row, column));
+        ILocationController ilc = new LocationController(connection.getConnection());
+        //setText(source.getModel().getValueAt(row, column));
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Delete", "Title on Box", dialogButton);
         if (dialogResult == 0) {
-            LocationModel location = new LocationModel(locationIdField.getText(), streetAddressField.getSelectedText(), postalCodeField.getText(), cityField.getText(), stateProvinceField.getText(), (String) countryIdBox.getSelectedItem());
+            Location location = new Location(locationIdField.getText(), streetAddressField.getSelectedText(), postalCodeField.getText(), cityField.getText(), stateProvinceField.getText(), countryIdBox.getSelectedItem()+"");
             //        confirmDelete("wkwk");
 
             JOptionPane.showMessageDialog(null, ilc.delete(location.getLocationId()));
@@ -524,20 +524,20 @@ public class LocationView extends javax.swing.JFrame {
 
     private void locationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_locationTableMouseClicked
         DbConnection connection = new DbConnection();
-        ILocationDao ildao = new LocationDao(connection.GetConnection());
-        ILocationController ilc = new LocationController(connection.GetConnection());
+        ILocationDao ildao = new LocationDao(connection.getConnection());
+        ILocationController ilc = new LocationController(connection.getConnection());
         JTable source = (JTable) evt.getSource();
         int i = locationTable.getSelectedRow();
         TableModel model = locationTable.getModel();
         locationIdField.setEditable(false);
 
-        locationIdField.setText((String) source.getModel().getValueAt(i, 1));
-        streetAddressField.setText((String) source.getModel().getValueAt(i, 2));
-        postalCodeField.setText((String) source.getModel().getValueAt(i, 3));
-        cityField.setText((String) source.getModel().getValueAt(i, 4));
-        stateProvinceField.setText((String) source.getModel().getValueAt(i, 5));
+        locationIdField.setText(source.getModel().getValueAt(i, 1)+"");
+        streetAddressField.setText(source.getModel().getValueAt(i, 2)+"");
+        postalCodeField.setText(source.getModel().getValueAt(i, 3)+"");
+        cityField.setText(source.getModel().getValueAt(i, 4)+"");
+        stateProvinceField.setText(source.getModel().getValueAt(i, 5)+"");
 
-        String sub1 = model.getValueAt(i, 6).toString();
+        String sub1 = model.getValueAt(i, 6)+"";
         switch (sub1) {
             case "C001":
                 countryIdBox.setSelectedIndex(0);
@@ -571,7 +571,7 @@ public class LocationView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Menu m = new Menu();
+        MenuView m = new MenuView();
 //        m.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -9,16 +9,16 @@ package models;
  *
  * @author Yosef Febrianes
  */
-public class RegionModel {
+public class Region {
     
     private String regionId;
     private String regionName;
 
-    public RegionModel(){}
+    public Region(){}
     
-    public RegionModel(String text){}
+    public Region(String text){}
     
-    public RegionModel(String regionId, String regionName) {
+    public Region(String regionId, String regionName) {
         this.regionId = regionId;
         this.regionName = regionName;
     }

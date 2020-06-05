@@ -11,12 +11,12 @@ import views.RegionView;
  *
  * @author Yosef Febrianes
  */
-public class Menu extends javax.swing.JFrame {
+public class MenuView extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public MenuView() {
         initComponents();
     }
 
@@ -30,7 +30,6 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jobsButton = new javax.swing.JButton();
-        jobHistoryButton = new javax.swing.JButton();
         contriesButton = new javax.swing.JButton();
         regionButton = new javax.swing.JButton();
         departementsButton = new javax.swing.JButton();
@@ -46,14 +45,20 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jobsButton.setText("JOBS");
+        jobsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobsButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(jobsButton);
         jobsButton.setBounds(1110, 350, 130, 50);
 
-        jobHistoryButton.setText("JOB_HISTORY");
-        getContentPane().add(jobHistoryButton);
-        jobHistoryButton.setBounds(1110, 430, 130, 50);
-
         contriesButton.setText("CONTRIES");
+        contriesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contriesButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(contriesButton);
         contriesButton.setBounds(1110, 110, 130, 50);
 
@@ -64,7 +69,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(regionButton);
-        regionButton.setBounds(1110, 590, 130, 50);
+        regionButton.setBounds(1110, 510, 130, 50);
 
         departementsButton.setText("DEPARTEMENTS");
         departementsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(locationsButton);
-        locationsButton.setBounds(1110, 510, 130, 50);
+        locationsButton.setBounds(1110, 430, 130, 50);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 51));
         jLabel2.setFont(new java.awt.Font("Corbel Light", 1, 36)); // NOI18N
@@ -132,6 +137,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void departementsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departementsButtonActionPerformed
         // TODO add your handling code here:
+        DepartmentView rv = new DepartmentView();
+        rv.setVisible(true);
     }//GEN-LAST:event_departementsButtonActionPerformed
 
     private void regionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regionButtonActionPerformed
@@ -157,6 +164,18 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void contriesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contriesButtonActionPerformed
+        // TODO add your handling code here:
+        CountryView rv = new CountryView();
+        rv.setVisible(true);
+    }//GEN-LAST:event_contriesButtonActionPerformed
+
+    private void jobsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobsButtonActionPerformed
+        // TODO add your handling code here:
+        JobView rv = new JobView();
+        rv.setVisible(true);
+    }//GEN-LAST:event_jobsButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,20 +193,21 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new MenuView().setVisible(true);
             }
         });
     }
@@ -201,7 +221,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JButton jobHistoryButton;
     private javax.swing.JButton jobsButton;
     private javax.swing.JButton locationsButton;
     private javax.swing.JButton regionButton;

@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import models.RegionModel;
+import models.Region;
 import tools.DbConnection;
 import java.util.ServiceLoader;
 import javax.swing.table.TableModel;
@@ -31,7 +31,7 @@ public class RegionView extends javax.swing.JFrame {
 
     void tampil() {
         DbConnection connection = new DbConnection();
-        IRegionDao irdao = new RegionDao(connection.GetConnection());
+        IRegionDao irdao = new RegionDao(connection.getConnection());
 
 //        Region r = new Region();
         DefaultTableModel dt;
@@ -46,13 +46,13 @@ public class RegionView extends javax.swing.JFrame {
 
         try {
             int i = 1;
-            for (RegionModel regiong : irdao.getAll()) {
+            for (Region regiong : irdao.getAll()) {
 //                System.out.println(regiong.getRegionId() + " || " + regiong.getRegionName());
 
-                String NO = (String) Integer.toString(i);
-                String ID = (String) regiong.getRegionId().toString();
-                String NM = (String) regiong.getRegionName().toString();
-                String bt = (String) refreshButton.toString();
+                String NO = Integer.toString(i);
+                String ID = regiong.getRegionId();
+                String NM = regiong.getRegionName();
+                String bt = refreshButton + "";
 
                 String[] data = {NO, ID, NM, bt};
                 dt.addRow(data);
@@ -66,9 +66,9 @@ public class RegionView extends javax.swing.JFrame {
 
     private void searching() {
         DbConnection connection = new DbConnection();
-        IRegionDao irdao = new RegionDao(connection.GetConnection());
-        IRegionController irc = new RegionController(connection.GetConnection());
-        RegionModel regionn = new RegionModel(searchButton.getText());
+        IRegionDao irdao = new RegionDao(connection.getConnection());
+        IRegionController irc = new RegionController(connection.getConnection());
+        Region regionn = new Region(searchButton.getText());
 
 //        Region r = new Region();
         DefaultTableModel dt;
@@ -79,11 +79,11 @@ public class RegionView extends javax.swing.JFrame {
         regionTable.setModel(dt);
 
         try {
-            for (RegionModel regiong : irdao.search(searchField.getText())) {
+            for (Region regiong : irdao.search(searchField.getText())) {
 //                System.out.println(regiong.getRegionId() + " || " + regiong.getRegionName());
 
-                String ID = (String) regiong.getRegionId().toString();
-                String NM = (String) regiong.getRegionName().toString();
+                String ID = regiong.getRegionId();
+                String NM = regiong.getRegionName();
 
                 String[] data = {ID, NM};
                 dt.addRow(data);
@@ -130,7 +130,7 @@ public class RegionView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(252, 198, 3));
+        jPanel1.setBackground(new java.awt.Color(153, 248, 16));
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(249, 255, 255));
@@ -313,9 +313,9 @@ public class RegionView extends javax.swing.JFrame {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         DbConnection connection = new DbConnection();
-        IRegionController irc = new RegionController(connection.GetConnection());
+        IRegionController irc = new RegionController(connection.getConnection());
 
-        RegionModel region = new RegionModel(regionIdField.getText(), regionNameField.getText());
+        Region region = new Region(regionIdField.getText(), regionNameField.getText());
 
         JOptionPane.showMessageDialog(null, irc.update(region));
         regionIdField.setText("");
@@ -326,8 +326,8 @@ public class RegionView extends javax.swing.JFrame {
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
 
         DbConnection connection = new DbConnection();
-        IRegionController irc = new RegionController(connection.GetConnection());
-        RegionModel region = new RegionModel(regionIdField.getText(), regionNameField.getText());
+        IRegionController irc = new RegionController(connection.getConnection());
+        Region region = new Region(regionIdField.getText(), regionNameField.getText());
 
         JOptionPane.showMessageDialog(null, irc.insert(region));
         SwingUtilities.updateComponentTreeUI(insertButton);
@@ -338,12 +338,12 @@ public class RegionView extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         DbConnection connection = new DbConnection();
-        IRegionController irc = new RegionController(connection.GetConnection());
+        IRegionController irc = new RegionController(connection.getConnection());
 
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Delete", "Title on Box", dialogButton);
         if (dialogResult == 0) {
-            RegionModel regionn = new RegionModel(regionIdField.getText(), regionNameField.getText());
+            Region regionn = new Region(regionIdField.getText(), regionNameField.getText());
             //        confirmDelete("wkwk");
 
             JOptionPane.showMessageDialog(null, irc.delete(regionn.getRegionId()));
@@ -373,15 +373,15 @@ public class RegionView extends javax.swing.JFrame {
 
     private void regionTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regionTableMouseClicked
         DbConnection connection = new DbConnection();
-        IRegionDao irdao = new RegionDao(connection.GetConnection());
-        IRegionController irc = new RegionController(connection.GetConnection());
-        
+        IRegionDao irdao = new RegionDao(connection.getConnection());
+        IRegionController irc = new RegionController(connection.getConnection());
+
         JTable source = (JTable) evt.getSource();
         regionIdField.setEditable(false);
 
         int i = regionTable.getSelectedRow();
-        regionIdField.setText((String) source.getModel().getValueAt(i, 1));
-        regionNameField.setText((String) source.getModel().getValueAt(i, 2));
+        regionIdField.setText(source.getModel().getValueAt(i, 1) + "");
+        regionNameField.setText(source.getModel().getValueAt(i, 2) + "");
     }//GEN-LAST:event_regionTableMouseClicked
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed

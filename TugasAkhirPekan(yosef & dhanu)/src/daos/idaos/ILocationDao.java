@@ -5,7 +5,7 @@
  */
 package daos.idaos;
 import java.util.List;
-import models.LocationModel;
+import models.Location;
 
 /**
  *
@@ -13,13 +13,13 @@ import models.LocationModel;
  */
 public interface ILocationDao {
     
-    public List<LocationModel> getAll();
+    public List<Location> getAll();
 
-    public boolean insert(LocationModel r);
+    public boolean insert(Location r);
 
-    public boolean update(LocationModel r);
+    public boolean update(Location r);
 
     public boolean delete(String locationId);
 
-    public List<LocationModel> search(String locationId);
+    public List<Location> search(String locationId);
 }
